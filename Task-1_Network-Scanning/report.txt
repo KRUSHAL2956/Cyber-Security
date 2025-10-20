@@ -1,0 +1,344 @@
+Network Scanning Task Report
+
+Name: Krushex
+Date: 20 October 2025
+
+================================================================================
+
+STEP 1: Installing Nmap
+
+Command:
+sudo apt install nmap
+
+What I learned:
+Nmap is a network scanning tool used to discover hosts and services. First step
+is to install it before scanning.
+
+================================================================================
+
+STEP 2: Check Network Interface
+
+Command:
+krushex@KRUSHEX:~/Desktop/Cyber Security/Task-1_Network-Scanning$ ifconfig
+
+Output:
+lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
+        inet 127.0.0.1  netmask 255.0.0.0
+        inet6 ::1  prefixlen 128  scopeid 0x10<host>
+        loop  txqueuelen 1000  (Local Loopback)
+        RX packets 6828  bytes 1638356 (1.6 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 6828  bytes 1638356 (1.6 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+wlp1s0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+        inet XXX.XXX.X.XXX  netmask 255.255.255.0  broadcast XXX.XXX.X.255
+        inet6 XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX  prefixlen 64  scopeid 0x0<global>
+        inet6 XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX:XXXX  prefixlen 64  scopeid 0x0<global>
+        inet6 XXXX::XXXX:XXXX:XXXX:XXXX  prefixlen 64  scopeid 0x20<link>
+        ether XX:XX:XX:XX:XX:XX  txqueuelen 1000  (Ethernet)
+        RX packets 29584  bytes 18089859 (18.0 MB)
+        RX errors 0  dropped 0  overruns 0  frame 0
+        TX packets 24754  bytes 11080377 (11.0 MB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
+
+What I learned:
+ifconfig shows network interface details. lo is loopback (127.0.0.1). wlp1s0 is
+wireless interface with my IP. Shows MAC address, RX/TX packets, and no errors
+means healthy connection.
+
+================================================================================
+
+STEP 3: Finding IP Address
+
+Command:
+krushex@KRUSHEX:~/Desktop/Cyber Security/Task-1_Network-Scanning$ ip addr show | grep "inet " | grep -v "127.0.0.1"
+
+Output:
+    inet XXX.XXX.X.XXX/24 brd XXX.XXX.X.255 scope global dynamic noprefixroute wlp1s0
+
+What I learned:
+This shows my IP address and network range. /24 means 256 addresses in the 
+network. wlp1s0 is my wireless network interface.
+
+================================================================================
+
+STEP 4: Scanning My Own Machine
+
+Command:
+krushex@KRUSHEX:~/Desktop/Cyber Security/Task-1_Network-Scanning$ sudo nmap XXX.XXX.X.XXX
+[sudo] password for krushex:
+
+Output:
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-10-20 13:31 IST
+Nmap scan report for KRUSHEX (XXX.XXX.X.XXX)
+Host is up (0.000015s latency).
+Not shown: 999 closed tcp ports (reset)
+PORT   STATE SERVICE
+80/tcp open  http
+
+Nmap done: 1 IP address (1 host up) scanned in 0.15 seconds
+
+What I learned:
+Basic nmap scan checks 1000 common ports. Found port 80 (HTTP) open - means web
+server is running. Very low latency because scanning my own machine.
+
+================================================================================
+
+STEP 5: Scanning Gateway Router
+
+Command:
+root@KRUSHEX:/home/krushex/Desktop/Cyber Security/Task-1_Network-Scanning$ sudo nmap XXX.XXX.X.X
+
+Output:
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-10-20 13:32 IST
+Nmap scan report for _gateway (XXX.XXX.X.X)
+Host is up (0.0072s latency).
+Not shown: 999 closed tcp ports (reset)
+PORT   STATE SERVICE
+53/tcp open  domain
+MAC Address: XX:XX:XX:XX:XX:XX (Unknown)
+
+Nmap done: 1 IP address (1 host up) scanned in 0.49 seconds
+
+What I learned:
+Gateway is the router. Port 53 is DNS service which translates domain names to
+IPs. MAC address visible because it's on local network. Normal for routers.
+
+================================================================================
+
+STEP 6: Scanning Localhost
+
+Command:
+root@KRUSHEX:/home/krushex/Desktop/Cyber Security/Task-1_Network-Scanning$ sudo nmap localhost
+
+Output:
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-10-20 13:32 IST
+Nmap scan report for localhost (127.0.0.1)
+Host is up (0.000016s latency).
+Not shown: 996 closed tcp ports (reset)
+PORT     STATE SERVICE
+80/tcp   open  http
+631/tcp  open  ipp
+3306/tcp open  mysql
+5432/tcp open  postgresql
+
+Nmap done: 1 IP address (1 host up) scanned in 0.15 seconds
+
+What I learned:
+Localhost scan shows services only accessible locally. Found 4 services:
+- Port 80: HTTP (Apache)
+- Port 631: IPP (printer service)
+- Port 3306: MySQL database
+- Port 5432: PostgreSQL database
+MySQL and PostgreSQL only on localhost - good for security.
+
+================================================================================
+
+STEP 7: Network-Wide TCP SYN Scan
+
+Command:
+root@KRUSHEX:/home/krushex/Desktop/Cyber Security/Task-1_Network-Scanning$ sudo nmap -sS XXX.XXX.X.0/24
+
+Output:
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-10-20 13:32 IST
+Nmap scan report for _gateway (XXX.XXX.X.X)
+Host is up (0.0059s latency).
+Not shown: 999 closed tcp ports (reset)
+PORT   STATE SERVICE
+53/tcp open  domain
+MAC Address: XX:XX:XX:XX:XX:XX (Unknown)
+
+Nmap scan report for KRUSHEX (XXX.XXX.X.XXX)
+Host is up (0.000016s latency).
+Not shown: 999 closed tcp ports (reset)
+PORT   STATE SERVICE
+80/tcp open  http
+
+Nmap done: 256 IP addresses (2 hosts up) scanned in 8.49 seconds
+
+What I learned:
+-sS is TCP SYN scan (stealth scan). Doesn't complete full TCP handshake so less
+detectable. /24 scans all 256 addresses. Found 2 active hosts in 8.49 seconds.
+Requires sudo for raw packet creation.
+
+================================================================================
+
+STEP 8: Save Scan Results to File
+
+Command:
+root@KRUSHEX:/home/krushex/Desktop/Cyber Security/Task-1_Network-Scanning$ sudo nmap -sS -oN scan_results.txt XXX.XXX.X.0/24
+
+Output:
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-10-20 13:33 IST
+Nmap scan report for _gateway (XXX.XXX.X.X)
+Host is up (0.015s latency).
+Not shown: 999 closed tcp ports (reset)
+PORT   STATE SERVICE
+53/tcp open  domain
+MAC Address: XX:XX:XX:XX:XX:XX (Unknown)
+
+Nmap scan report for KRUSHEX (XXX.XXX.X.XXX)
+Host is up (0.000016s latency).
+Not shown: 999 closed tcp ports (reset)
+PORT   STATE SERVICE
+80/tcp open  http
+
+Nmap done: 256 IP addresses (2 hosts up) scanned in 8.45 seconds
+
+What I learned:
+-oN saves scan output to text file. Useful for documentation and records.
+Created scan_results.txt with complete results.
+
+================================================================================
+
+STEP 9: Service Version Detection
+
+Command:
+root@KRUSHEX:/home/krushex/Desktop/Cyber Security/Task-1_Network-Scanning$ sudo nmap -sV XXX.XXX.X.XXX
+
+Output:
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-10-20 13:34 IST
+Nmap scan report for KRUSHEX (XXX.XXX.X.XXX)
+Host is up (0.000015s latency).
+Not shown: 999 closed tcp ports (reset)
+PORT   STATE SERVICE VERSION
+80/tcp open  http    Apache httpd 2.4.58 ((Ubuntu))
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 6.59 seconds
+
+What I learned:
+-sV detects service versions. Identified Apache httpd 2.4.58 on Ubuntu. Takes
+longer (6.59 sec) because it probes the service. Important for finding 
+vulnerabilities specific to versions.
+
+================================================================================
+
+STEP 10: Fast Scan
+
+Command:
+root@KRUSHEX:/home/krushex/Desktop/Cyber Security/Task-1_Network-Scanning$ sudo nmap -F XXX.XXX.X.0/24
+
+Output:
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-10-20 13:35 IST
+Stats: 0:00:00 elapsed; 0 hosts completed (0 up), 255 undergoing ARP Ping Scan
+ARP Ping Scan Timing: About 3.92% done; ETC: 13:35 (0:00:00 remaining)
+Nmap scan report for _gateway (XXX.XXX.X.X)
+Host is up (0.011s latency).
+Not shown: 99 closed tcp ports (reset)
+PORT   STATE SERVICE
+53/tcp open  domain
+MAC Address: XX:XX:XX:XX:XX:XX (Unknown)
+
+Nmap scan report for KRUSHEX (XXX.XXX.X.XXX)
+Host is up (0.000016s latency).
+Not shown: 99 closed tcp ports (reset)
+PORT   STATE SERVICE
+80/tcp open  http
+
+Nmap done: 256 IP addresses (2 hosts up) scanned in 7.82 seconds
+
+What I learned:
+-F scans only top 100 ports instead of 1000. Faster (7.82 sec vs 8.49 sec).
+Useful for quick results on common ports only.
+
+================================================================================
+
+STEP 11: Aggressive Scan with OS Detection
+
+Command:
+root@KRUSHEX:/home/krushex/Desktop/Cyber Security/Task-1_Network-Scanning$ sudo nmap -A XXX.XXX.X.XXX
+
+Output:
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-10-20 13:35 IST
+Nmap scan report for KRUSHEX (XXX.XXX.X.XXX)
+Host is up (0.000073s latency).
+Not shown: 999 closed tcp ports (reset)
+PORT   STATE SERVICE VERSION
+80/tcp open  http    Apache httpd 2.4.58 ((Ubuntu))
+|_http-title: Apache2 Ubuntu Default Page: It works
+|_http-server-header: Apache/2.4.58 (Ubuntu)
+Device type: general purpose
+Running: Linux 2.6.X
+OS CPE: cpe:/o:linux:linux_kernel:2.6.32
+OS details: Linux 2.6.32
+Network Distance: 0 hops
+
+OS and Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 8.29 seconds
+
+What I learned:
+-A enables aggressive scan with OS detection, version detection, and scripts.
+Identified Linux 2.6.X, Apache 2.4.58, and HTTP default page. 0 hops means
+scanning same machine. Provides detailed info but more detectable.
+
+================================================================================
+
+STEP 12: UDP Scan
+
+Command:
+root@KRUSHEX:/home/krushex/Desktop/Cyber Security/Task-1_Network-Scanning$ sudo nmap -sU -p 53,67,68,123 XXX.XXX.X.X
+
+Output:
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-10-20 13:35 IST
+Nmap scan report for _gateway (XXX.XXX.X.X)
+Host is up (0.016s latency).
+
+PORT    STATE         SERVICE
+53/udp  open          domain
+67/udp  open|filtered dhcps
+68/udp  closed        dhcpc
+123/udp closed        ntp
+MAC Address: XX:XX:XX:XX:XX:XX (Unknown)
+
+Nmap done: 1 IP address (1 host up) scanned in 1.57 seconds
+
+What I learned:
+-sU scans UDP ports (different from TCP). -p specifies which ports. Found DNS
+on 53 and DHCP on 67. "open|filtered" means unsure if open or blocked by 
+firewall. UDP scanning slower than TCP.
+
+================================================================================
+
+STEP 13: Ping Scan (Host Discovery)
+
+Command:
+root@KRUSHEX:/home/krushex/Desktop/Cyber Security/Task-1_Network-Scanning$ sudo nmap -sn XXX.XXX.X.0/24
+
+Output:
+Starting Nmap 7.94SVN ( https://nmap.org ) at 2025-10-20 13:36 IST
+Nmap scan report for _gateway (XXX.XXX.X.X)
+Host is up (0.0076s latency).
+MAC Address: XX:XX:XX:XX:XX:XX (Unknown)
+Nmap scan report for KRUSHEX (XXX.XXX.X.XXX)
+Host is up.
+Nmap done: 256 IP addresses (2 hosts up) scanned in 8.06 seconds
+
+What I learned:
+-sn is ping scan (host discovery) without port scanning. Just finds which hosts
+are alive. Faster than full scan. Found 2 out of 256 addresses active. Good
+first step before detailed scanning.
+
+================================================================================
+
+SUMMARY
+
+Network: XXX.XXX.X.0/24
+Active Hosts: 2
+Tool: Nmap 7.94SVN
+
+Host 1 - Gateway (XXX.XXX.X.X):
+- Port 53/TCP - DNS
+- Port 53/UDP - DNS
+- Port 67/UDP - DHCP
+
+Host 2 - KRUSHEX (XXX.XXX.X.XXX):
+- Port 80/TCP - Apache httpd 2.4.58
+
+Localhost Only:
+- Port 631/TCP - IPP
+- Port 3306/TCP - MySQL
+- Port 5432/TCP - PostgreSQL
+
+================================================================================

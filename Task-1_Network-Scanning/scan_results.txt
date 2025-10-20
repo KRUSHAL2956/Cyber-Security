@@ -1,0 +1,15 @@
+# Nmap 7.94SVN scan initiated Mon Oct 20 13:33:38 2025 as: nmap -sS -oN scan_results.txt XXX.XXX.X.0/24
+Nmap scan report for _gateway (XXX.XXX.X.X)
+Host is up (0.015s latency).
+Not shown: 999 closed tcp ports (reset)
+PORT   STATE SERVICE
+53/tcp open  domain
+MAC Address: XX:XX:XX:XX:XX:XX (Unknown)
+
+Nmap scan report for KRUSHEX (XXX.XXX.X.XXX)
+Host is up (0.000016s latency).
+Not shown: 999 closed tcp ports (reset)
+PORT   STATE SERVICE
+80/tcp open  http
+
+# Nmap done at Mon Oct 20 13:33:46 2025 -- 256 IP addresses (2 hosts up) scanned in 8.45 seconds

@@ -1,0 +1,45 @@
+Task 1 - Network Scanning Notes
+
+Date: 20 October 2025
+
+Commands executed in order:
+
+1. sudo apt install nmap
+2. ifconfig
+3. ip addr show | grep "inet " | grep -v "127.0.0.1"
+4. sudo nmap XXX.XXX.X.XXX
+5. sudo nmap XXX.XXX.X.X
+6. sudo nmap localhost
+7. sudo nmap -sS XXX.XXX.X.0/24
+8. sudo nmap -sS -oN scan_results.txt XXX.XXX.X.0/24
+9. sudo nmap -sV XXX.XXX.X.XXX
+10. sudo nmap -F XXX.XXX.X.0/24
+11. sudo nmap -A XXX.XXX.X.XXX
+12. sudo nmap -sU -p 53,67,68,123 XXX.XXX.X.X
+13. sudo nmap -sn XXX.XXX.X.0/24
+
+Key Findings:
+
+Network: XXX.XXX.X.0/24
+Active hosts: 2
+
+Gateway (XXX.XXX.X.X):
+- DNS on port 53
+- DHCP on port 67
+
+My computer (XXX.XXX.X.XXX):
+- Apache on port 80
+
+Localhost services:
+- IPP on port 631
+- MySQL on port 3306
+- PostgreSQL on port 5432
+
+Scan timings:
+- Basic scan: 0.15-0.49 seconds
+- Full network: 8-9 seconds
+- Version detection: 6.5 seconds
+- Aggressive: 8.29 seconds
+- UDP: 1.57 seconds
+
+================================================================================
