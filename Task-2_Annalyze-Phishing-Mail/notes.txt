@@ -1,0 +1,25 @@
+Task 2 - Phishing Emails in Action
+
+- Completed both TryHackMe rooms: Phishing Analysis Fundamentals and Phishing Emails in Action
+- Used CyberChef for base64 decoding and defanging
+- Practiced identifying phishing techniques: spoofed sender, urgency, brand impersonation, suspicious links/attachments
+- All findings and analysis are summarized in report.txt
+
+---
+
+Topics and Concepts Learned:
+
+- What is phishing and why it's dangerous
+- Types of phishing: email phishing, spear phishing, whaling, smishing, vishing
+- Anatomy of an email address (user, @, domain)
+- Email protocols: SMTP, IMAP, POP3 (and their secure ports)
+- How email travels from sender to recipient
+- Email headers: From, To, Subject, Date, Reply-To, Return-Path, X-Originating-IP
+- How to analyze email headers for signs of phishing
+- Email body formats: plain text, HTML, and attachments
+- Common phishing tactics: spoofed sender, urgency, fake brands, suspicious links, attachments
+- Defanging URLs and why it's important
+- Using CyberChef for base64 decoding and defanging
+- Identifying and analyzing suspicious links and attachments
+- Indicators of compromise (IOCs) in phishing emails
+- Importance of user awareness and reporting phishing

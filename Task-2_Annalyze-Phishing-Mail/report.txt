@@ -1,0 +1,95 @@
+Phishing Email Analysis Task Report
+
+Name: Krushal Hirpara
+Date: 21 October 2025
+
+================================================================================
+
+SUMMARY
+
+- Completed hands-on phishing analysis using real-world samples
+- Learned to analyze headers, bodies, links, and attachments
+- Practiced safe analysis techniques and documented IOCs
+- Improved ability to detect and respond to phishing threats
+
+================================================================================
+
+STEP 1: Introduction to Phishing Analysis
+
+What I learned:
+Phishing is a cyber attack where attackers impersonate trusted entities to trick users into revealing sensitive information or clicking malicious links. Awareness and hands-on analysis are essential to detect and prevent phishing attacks.
+
+================================================================================
+
+STEP 2: Analyzing Phishing Email Samples (TryHackMe Labs)
+
+Platform: TryHackMe
+Rooms Completed:
+- Phishing Analysis Fundamentals
+- Phishing Emails in Action
+
+What I learned:
+- How to identify phishing emails by analyzing sender, subject, and content
+- Recognizing spoofed sender addresses and urgency tactics
+- Spotting brand impersonation and suspicious links/attachments
+
+================================================================================
+
+STEP 3: Email Header Analysis
+
+Tool/Method:
+- Viewed email headers (From, To, Subject, Date, Reply-To, Return-Path, X-Originating-IP)
+
+What I learned:
+Email headers reveal the true sender, routing path, and possible signs of spoofing. Analyzing headers helps detect forged addresses and suspicious origins.
+
+================================================================================
+
+STEP 4: Email Body and Link Analysis
+
+Tool/Method:
+- Examined email body for urgent language, fake branding, and suspicious links
+- Used CyberChef to defang URLs and decode base64 data
+
+What I learned:
+Phishing emails often use urgent language, fake brands, and links that hide their true destination. Defanging URLs prevents accidental clicks. CyberChef is useful for safe analysis.
+
+================================================================================
+
+STEP 5: Attachment Analysis
+
+Tool/Method:
+- Checked for unexpected attachments (PDF, DOT, Excel)
+- Used CyberChef for base64 decoding
+
+What I learned:
+Phishing emails may include attachments with embedded links or malware. Always analyze attachments in a safe environment and check for hidden threats.
+
+================================================================================
+
+STEP 6: Indicators of Compromise (IOCs)
+
+What I learned:
+IOCs include suspicious sender domains, IP addresses, URLs, and file hashes. Documenting IOCs helps improve detection and response to future phishing attempts.
+
+================================================================================
+
+STEP 7: Key Phishing Techniques Observed
+
+- Spoofed sender addresses
+- Use of urgency and social engineering
+- Brand impersonation (PayPal, Netflix, Apple, DHL, etc.)
+- URL shortening and link manipulation
+- Pixel tracking for user activity
+- Credential harvesting via fake login pages
+- Malicious attachments (PDF, DOT, Excel)
+
+================================================================================
+
+STEP 8: Tools Used
+
+- CyberChef (base64 decoding, defanging)
+- TryHackMe platform labs
+- (Other tools: VirusTotal, MXToolbox, URLScan.io, as needed)
+
+================================================================================
