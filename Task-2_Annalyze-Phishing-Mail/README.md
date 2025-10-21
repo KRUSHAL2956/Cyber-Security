@@ -3,7 +3,6 @@
 I did this task on 21 October 2025. This is my own handwritten-style notes and report from practicing phishing email analysis.
 
 ## What’s here
-- `Task 2.pdf` — original task
 - `report.txt` — my step-by-step notes and findings (what I did and learned)
 - `notes.txt` — short theory points I wrote down while learning
 
