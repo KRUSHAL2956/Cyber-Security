@@ -1,0 +1,144 @@
+TASK 4: FIREWALL CONFIGURATION WITH UFW
+Name: Krushal Hirpara
+Date: 27 October 2025
+
+================================================================================
+
+STEP 1: Start and confirm tools/status
+
+Commands:
+- which ufw → /usr/sbin/ufw
+- sudo ufw status verbose → Status: inactive
+
+What I noted:
+UFW is installed but inactive. Proceeding to set secure defaults.
+
+================================================================================
+
+STEP 2: Set secure defaults
+
+Commands:
+- sudo ufw default deny incoming
+- sudo ufw default allow outgoing
+
+What I noted:
+This blocks unsolicited inbound connections while keeping outbound traffic working.
+
+================================================================================
+
+STEP 3: Keep remote access safe and enable
+
+Commands:
+- sudo ufw allow ssh   (same as 22/tcp)
+- sudo ufw enable
+
+What I noted:
+Allowing SSH first prevents lockout. Enabling activates the rules immediately.
+
+================================================================================
+
+STEP 4: Block Telnet and verify
+
+Commands:
+- sudo ufw deny 23/tcp
+- sudo ufw status numbered
+- nc -v localhost 23 → Connection refused
+- telnet localhost 23 → Unable to connect (refused)
+
+What I noted:
+Telnet is insecure and should be blocked. Numbered status helps manage rules.
+
+================================================================================
+
+STEP 5: Web service allow tests
+
+Commands:
+- sudo ufw allow 80/tcp
+- sudo ufw allow https  (443)
+
+What I noted:
+Temporary allows were used to observe rule behavior.
+
+================================================================================
+
+STEP 6: IP allow/deny examples
+
+Commands (example with local Wi‑Fi IP 10.84.**.***):
+- sudo ufw deny from 10.84.**.***
+- sudo ufw allow from 10.84.**.*** to any port 22
+- sudo ufw status numbered
+- sudo ufw delete 8   (deleted a sample v6 rule)
+
+What I noted:
+Per‑IP rules are useful for restricting admin access and blocking sources.
+
+================================================================================
+
+STEP 7: Resets and logging
+
+Commands:
+- sudo ufw reset           (backs up rules then resets)
+- sudo ufw logging on
+- sudo ufw logging high
+- sudo tail -f /var/log/ufw.log   (log path)
+
+What I noted:
+Reset removes all custom rules; use carefully. Logging helps verify behavior.
+
+================================================================================
+
+STEP 8: Services for scanning demo
+
+Commands:
+- sudo ufw disable   (temporarily as needed)
+- python3 -m http.server 8080 &
+- sudo apt install vsftpd -y; sudo systemctl start vsftpd
+- nc -l -p 9999 &
+- sudo netstat -tuln | grep LISTEN
+
+What I noted:
+This exposed ports for demonstration: 21 (FTP), 80 (Apache), 631 (IPP), 8080 (HTTP), 9999 (nc), etc.
+
+================================================================================
+
+STEP 9: Scanning and observations
+
+Commands:
+- nmap localhost
+- sudo nmap -A -p- localhost
+
+Observed services (examples):
+- vsftpd 3.0.5 on 21; Apache 2.4.58 on 80; CUPS 2.4 on 631
+- MySQL 8.0 on 3306; MySQLX on 33060; Python SimpleHTTP/0.6 on 8080
+- OpenVAS web on 9392; Ollama probe on 11434; MongoDB 7.0.25 on 27017
+
+Note:
+Localhost scans enumerate local daemons even with “deny incoming”, because loopback is not filtered by UFW’s inbound policy.
+
+================================================================================
+
+STEP 10: Final minimal policy
+
+Commands:
+- sudo ufw default deny incoming
+- sudo ufw default allow outgoing
+- sudo ufw allow 22/tcp
+- sudo ufw enable
+
+Result:
+SSH allowed; Telnet can be explicitly denied; unsolicited external ingress blocked.
+
+================================================================================
+
+SMALL FIXES ENCOUNTERED
+
+- Typo corrections: which (not whitch), sudo (not udo), default (not defaault), netstat (not netstart), /var/log/ufw.log (not var/log/ufw.log).
+
+================================================================================
+
+SUMMARY
+
+- Secure defaults applied; SSH allowed safely before enabling
+- Insecure Telnet blocked and verified
+- Demonstrated per‑IP rules, resets, and logging
+- Nmap showed local services as expected on loopback; external ingress controlled by UFW

@@ -1,0 +1,25 @@
+Task 4 - Firewall Configuration Notes
+Date: 27 October 2025
+
+Topics:
+
+1) What a firewall does
+- Filters traffic with rules. Good host policy: deny unknown inbound, allow outbound.
+
+2) UFW essentials
+- Simple front‑end on Ubuntu (iptables/nftables under the hood).
+- Defaults that matter: deny incoming, allow outgoing.
+- Allow services by name or port (ssh / 22/tcp). Use numbered status to manage rules.
+
+3) Inbound vs outbound
+- Inbound = new connections to this host.
+- Outbound = connections from this host.
+- Deny inbound + allow outbound keeps apps usable while blocking unsolicited access.
+
+4) Loopback note
+- Scanning 127.0.0.1 still shows local services. UFW’s inbound policy focuses on external ingress, not loopback.
+
+5) Practical tips
+- Add SSH allow before enable to avoid lockout.
+- Block insecure services (e.g., Telnet/23).
+- Turn logging on when testing; be careful with reset (removes all rules).
