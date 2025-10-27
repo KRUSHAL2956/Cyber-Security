@@ -1,0 +1,179 @@
+Network Packet Analysis Report
+
+Name: Krushal Hirpara
+Date: 27 October 2025
+
+================================================================================
+OBJECTIVE
+================================================================================
+
+Capture and analyze network packets using Wireshark to identify protocols and
+understand network traffic patterns.
+
+================================================================================
+INSTALLATION & SETUP
+================================================================================
+
+Commands:
+sudo apt update
+sudo apt install wireshark tshark -y
+sudo usermod -aG wireshark $USER
+newgrp wireshark
+
+Version: Wireshark 4.2.2
+Interface: wlan0 (IP: 10.84.xx.xxx/24)
+
+================================================================================
+PACKET CAPTURE
+================================================================================
+
+Launch: wireshark &
+
+Steps:
+1. Selected wlan0 interface
+2. Browsed google.com, github.com, youtube.com  
+3. Captured for 123.8 seconds
+4. Saved as Capture.pcapng
+
+Results: 547 packets, 124.4 KB
+
+================================================================================
+PROTOCOL ANALYSIS
+================================================================================
+
+DNS (dns) - 30 packets, port 53 UDP
+- google.com → 142.250.xxx.xx
+- github.com → 20.207.xx.xx
+- youtube.com → 142.250.xx.xx
+
+HTTP (http) - 2 packets, port 80
+
+TCP (tcp) - 401 packets (73.3%)
+
+TLS (tls) - 116 packets (21.2%), port 443
+
+ICMP (icmp) - 11 packets (2.0%)
+
+ICMPv6 - 45 packets (8.2%)
+
+QUIC - 26 packets (4.8%)
+
+ARP - 10 packets (1.8%)
+
+NTP - 4 packets (0.7%)
+
+mDNS - 2 packets (0.4%)
+
+Protocol Hierarchy (Statistics → Protocol Hierarchy):
+
+Frame: 547 packets
+├─ IPv6: 505 (92.3%)
+│  ├─ TCP: 381
+│  ├─ UDP: 79
+│  └─ ICMPv6: 45
+├─ IPv4: 32 (5.8%)
+└─ ARP: 10 (1.8%)
+
+================================================================================
+COMMAND-LINE ANALYSIS
+================================================================================
+
+tshark -r Capture.pcapng -q -z io,phs
+Shows protocol hierarchy
+
+tshark -r Capture.pcapng -q -z conv,tcp
+Major connections: Google (40 pkts, 30 KB), Facebook (36 pkts, 5.1 KB), 
+GitHub (8 pkts, 654 bytes)
+
+tshark -r Capture.pcapng -Y "dns" -T fields -e dns.qry.name -e dns.a
+DNS query analysis
+
+tshark -r Capture.pcapng -q -z io,stat,0
+Duration: 123.8s, Frames: 547, Bytes: 127,408
+
+================================================================================
+PROTOCOLS SUMMARY
+================================================================================
+
+Protocol  | Packets | %    | Purpose
+----------|---------|------|----------------------
+TCP       | 401     | 73.3 | Reliable connections
+TLS/SSL   | 116     | 21.2 | HTTPS encryption
+ICMPv6    | 45      | 8.2  | IPv6 diagnostics
+DNS       | 30      | 5.5  | Domain resolution
+QUIC      | 26      | 4.8  | Fast transport
+ICMP      | 11      | 2.0  | Ping diagnostics
+ARP       | 10      | 1.8  | MAC resolution
+NTP       | 4       | 0.7  | Time sync
+HTTP      | 2       | 0.4  | Web requests
+mDNS      | 2       | 0.4  | Service discovery
+
+Total: 10 protocols
+
+================================================================================
+KEY FINDINGS
+================================================================================
+
+Network:
+- IPv6 dominates (92.3% of traffic)
+- TCP main transport protocol (73.3%)
+- DNS required for all connections
+
+Security:
+- Encrypted traffic: 142 packets (26%)
+- Unencrypted HTTP: 2 packets (0.4%)
+- Good security posture
+- No suspicious activity detected
+
+Technology:
+- HTTPS now standard
+- QUIC emerging for faster connections
+- IPv6 replacing IPv4
+
+================================================================================
+LEARNING OUTCOMES
+================================================================================
+
+Protocol Knowledge:
+- TCP: Reliable, connection-oriented
+- UDP: Fast, connectionless
+- DNS: Domain to IP translation
+- TLS: HTTPS encryption
+- ICMP: Network diagnostics
+
+Wireshark Skills:
+- Capture packets on network interface
+- Apply protocol filters
+- Analyze packet layers
+- Use tshark for CLI analysis
+
+Security Understanding:
+- HTTPS encrypts content
+- DNS queries expose visited sites
+- Modern web uses TLS
+
+================================================================================
+CHALLENGES
+================================================================================
+
+1. Permissions - Fixed by adding user to wireshark group
+2. Filters - Learned filter syntax
+3. IPv6 - Long address format
+4. Layers - Understood OSI model
+
+================================================================================
+CONCLUSION
+================================================================================
+
+Successfully captured 547 packets, identified 10 protocols, and analyzed
+traffic patterns. Network shows healthy activity with good security practices.
+
+Achievements:
+✓ Installed Wireshark 4.2.2
+✓ Captured live network packets
+✓ Identified 10 protocols
+✓ Used GUI and CLI tools
+✓ Analyzed packet structure
+
+Gained practical experience in packet analysis for network security and
+troubleshooting.

@@ -1,0 +1,274 @@
+Task 5 - Theory and Concepts Learned
+Date: 27 October 2025
+
+================================================================================
+
+WHAT IS WIRESHARK?
+
+Wireshark is a free, open-source network protocol analyzer. It captures network
+packets in real-time and displays them in human-readable format. Used for:
+- Network troubleshooting
+- Protocol analysis
+- Security analysis
+- Learning how networks work
+
+================================================================================
+
+WHAT IS A PACKET?
+
+A packet is a small unit of data transmitted over a network. Think of it like
+an envelope:
+- Header: Contains source and destination addresses
+- Payload: The actual data being sent
+- Trailer: Error checking information
+
+Every network communication is broken into packets.
+
+================================================================================
+
+NETWORK PROTOCOLS LEARNED
+
+1. TCP (Transmission Control Protocol)
+   - Connection-oriented protocol
+   - Reliable delivery guaranteed
+   - Three-way handshake: SYN → SYN-ACK → ACK
+   - Used for: Web browsing, email, file transfers
+   - Port: Various (80 for HTTP, 443 for HTTPS)
+
+2. UDP (User Datagram Protocol)
+   - Connectionless protocol
+   - Fast but no delivery guarantee
+   - No handshake needed
+   - Used for: DNS, streaming, gaming, VoIP
+   - Port: 53 for DNS, various others
+
+3. DNS (Domain Name System)
+   - Translates domain names to IP addresses
+   - Port 53 (UDP)
+   - Example: google.com → 142.250.195.78
+   - Happens before every website connection
+
+4. HTTP (Hypertext Transfer Protocol)
+   - Web page requests and responses
+   - Port 80 (TCP)
+   - Unencrypted - can see all data
+   - Being replaced by HTTPS
+
+5. HTTPS / TLS (HTTP Secure / Transport Layer Security)
+   - Encrypted version of HTTP
+   - Port 443 (TCP)
+   - Content is encrypted and secure
+   - Modern standard for web traffic
+
+6. ICMP (Internet Control Message Protocol)
+   - Network diagnostics and error reporting
+   - Used by ping and traceroute
+   - No port number (network layer)
+   - Types: Echo Request (ping), Echo Reply
+
+7. ICMPv6 (ICMP for IPv6)
+   - IPv6 version of ICMP
+   - Neighbor Discovery (replaces ARP)
+   - Router Discovery
+   - Essential for IPv6 networks
+
+8. ARP (Address Resolution Protocol)
+   - Maps IP addresses to MAC addresses
+   - Works on local network only
+   - Question: "Who has IP X.X.X.X?"
+   - Answer: "MAC address is XX:XX:XX:XX:XX:XX"
+
+9. QUIC (Quick UDP Internet Connections)
+   - Modern protocol developed by Google
+   - UDP-based but reliable and encrypted
+   - Faster connection setup than HTTPS
+   - Used by Google services, YouTube
+
+10. NTP (Network Time Protocol)
+    - Synchronizes computer clocks
+    - Port 123 (UDP)
+    - Keeps system time accurate
+    - Runs automatically in background
+
+11. mDNS (Multicast DNS)
+    - Local network service discovery
+    - Port 5353 (UDP)
+    - Finds devices without DNS server
+    - Used by: Printers, smart devices
+
+================================================================================
+
+OSI MODEL LAYERS (HOW PACKETS ARE STRUCTURED)
+
+Layer 7 - Application: HTTP, DNS, TLS (what you see)
+Layer 6 - Presentation: Encryption, encoding
+Layer 5 - Session: Connection management
+Layer 4 - Transport: TCP, UDP (reliability)
+Layer 3 - Network: IP, ICMP (routing)
+Layer 2 - Data Link: Ethernet, ARP (local delivery)
+Layer 1 - Physical: Cables, WiFi (actual transmission)
+
+Each layer adds its own header to the packet.
+
+================================================================================
+
+TCP vs UDP COMPARISON
+
+TCP:
+- Connection-oriented (handshake first)
+- Reliable (guarantees delivery)
+- Ordered (packets arrive in order)
+- Slower (overhead from reliability)
+- Used for: Web, email, file transfers
+
+UDP:
+- Connectionless (no handshake)
+- Fast (minimal overhead)
+- No guarantee (packets may be lost)
+- No ordering
+- Used for: DNS, streaming, gaming
+
+================================================================================
+
+IPv4 vs IPv6
+
+IPv4:
+- 32-bit addresses (e.g., 192.168.1.1)
+- About 4.3 billion addresses
+- Running out of addresses
+- Uses ARP for address resolution
+
+IPv6:
+- 128-bit addresses (e.g., 2404:6800:4009:812::2004)
+- 340 undecillion addresses (practically unlimited)
+- Future of internet
+- Uses ICMPv6 Neighbor Discovery instead of ARP
+
+My network uses 92.3% IPv6 - shows modern infrastructure.
+
+================================================================================
+
+HOW DNS WORKS
+
+1. User types: google.com in browser
+2. Computer sends DNS query to DNS server (port 53 UDP)
+3. DNS server responds with IP address: 142.250.195.78
+4. Computer connects to that IP address
+5. Website loads
+
+Without DNS, we would need to remember IP addresses for every website.
+
+================================================================================
+
+TCP THREE-WAY HANDSHAKE
+
+Before data transfer, TCP establishes connection:
+
+1. SYN: Client → Server
+   "I want to connect" (Sequence number = X)
+
+2. SYN-ACK: Server → Client
+   "OK, I acknowledge" (Sequence = Y, Ack = X+1)
+
+3. ACK: Client → Server
+   "Acknowledged, let's start" (Ack = Y+1)
+
+Now connection is established and data can flow.
+
+================================================================================
+
+TLS/HTTPS HANDSHAKE
+
+For secure connections (HTTPS):
+
+1. Client Hello: Browser initiates secure connection
+2. Server Hello: Server sends certificate
+3. Key Exchange: Both agree on encryption keys
+4. Encrypted Data: All content encrypted
+
+Wireshark can see handshake but cannot read encrypted content.
+
+================================================================================
+
+WIRESHARK DISPLAY FILTERS
+
+dns - Show only DNS packets
+http - Show only HTTP packets
+tcp - Show only TCP packets
+udp - Show only UDP packets
+icmp - Show only ICMP packets
+tls or ssl - Show encrypted HTTPS traffic
+arp - Show ARP requests/replies
+tcp.port == 80 - Traffic on port 80
+ip.addr == 8.8.8.8 - Traffic to/from specific IP
+http and tcp.port == 80 - Combined filters
+
+================================================================================
+
+PACKET CAPTURE WORKFLOW
+
+1. Select network interface (wlan0, eth0, etc.)
+2. Start capture
+3. Generate traffic (browse websites, ping, etc.)
+4. Stop capture after desired time
+5. Apply filters to analyze specific protocols
+6. Save as .pcap or .pcapng file
+7. Analyze findings
+
+================================================================================
+
+SECURITY CONCEPTS LEARNED
+
+Encryption:
+- HTTPS (TLS) encrypts data - good for privacy
+- HTTP sends data in plain text - security risk
+- Modern web uses mostly HTTPS
+
+Privacy:
+- DNS queries are visible (shows what sites you visit)
+- Packet metadata visible (who you connect to)
+- Content protected only if encrypted
+
+Network Monitoring:
+- Wireshark can capture all traffic on network
+- Can detect suspicious activity
+- Important for security analysis
+
+================================================================================
+
+PRACTICAL APPLICATIONS
+
+Network Troubleshooting:
+- See if packets are reaching destination
+- Check for packet loss
+- Identify slow connections
+
+Security Analysis:
+- Detect malware communication
+- Find suspicious traffic
+- Analyze attack patterns
+
+Protocol Learning:
+- Understand how internet works
+- See real protocol behavior
+- Debug application issues
+
+Performance Monitoring:
+- Find bottlenecks
+- Analyze bandwidth usage
+- Optimize network
+
+================================================================================
+
+KEY TAKEAWAYS
+
+- Every online action generates many packets
+- Protocols work in layers (OSI model)
+- TCP is reliable but slower, UDP is fast but unreliable
+- DNS is essential for every connection
+- Encryption (HTTPS/TLS) is now standard for security
+- IPv6 is the future and already widely used
+- Wireshark is powerful for understanding networks
+- Packet analysis is crucial for cybersecurity
+
+================================================================================
