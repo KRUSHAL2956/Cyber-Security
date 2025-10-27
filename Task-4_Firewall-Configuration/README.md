@@ -10,6 +10,7 @@ SUBMISSION FILES
 1. README.md - This file (overview and quick steps)
 2. report.txt - Step-by-step practical with observations
 3. notes.txt - Short theory (firewall basics and UFW)
+4. image.png - UFW log screenshot (masked for privacy)
 
 ================================================================================
 
