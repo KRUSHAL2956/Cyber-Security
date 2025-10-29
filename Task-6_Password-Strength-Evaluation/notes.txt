@@ -1,0 +1,74 @@
+TASK 6 — NOTES (Password Strength & Best Practices)
+Date: 28 October 2025
+
+================================================================================
+
+GOAL
+
+- Understand what makes a password “strong” (practical, not just theoretical)
+- Compare length vs. character complexity
+- Summarize actionable do’s and don’ts
+
+================================================================================
+
+QUICK THEORY
+
+Strength factors (in practice):
+- Length (biggest win) → 14–16+ chars recommended
+- Unpredictability (no patterns, no common substitutions like P@ssw0rd!)
+- Diversity of character sets (lower, upper, digits, symbols)
+- Avoid reuse (unique per site)
+- Use MFA (password + something else)
+
+Entropy (rough mental math): H ≈ L × log2(N)
+- N ~ 26 (lower), 52 (lower+upper), 62 (+digits), ~90 (+symbols)
+- Example: 16 chars, lower+upper+digits → 16 × log2(62) ≈ 16 × 5.95 ≈ 95 bits
+
+================================================================================
+
+ATTACKS (RESEARCH NOTES)
+
+- Brute force: try all combos; mitigated by long length and rate limits
+- Dictionary: tries common words/phrases; mitigated by randomness/passphrases
+- Credential stuffing: uses breached passwords; mitigated by unique passwords
+- Phishing: steals passwords regardless of entropy; mitigated by MFA + awareness
+
+================================================================================
+
+IDEAS I TESTED
+
+- Compare 8 vs 12 vs 16 vs 24 char passwords
+- Patterns to avoid: Season2025!, Name@123, Qwerty123!, Company@2025!
+- Passphrases: 4–5 unrelated words with separators (e.g., carrot-river-lime-robot)
+- Add minimal symbols to passphrases to see impact
+
+================================================================================
+
+PASSCODE SNIPPETS (EXAMPLES I TRIED)
+
+- weakpass (8) → only lower, predictable
+- Summer2025! (11) → common pattern, mixed but guessable
+- Nvy3r6p9 (8) → random but short
+- CoffeeHorse!Train?42 (20) → long mixed; strong
+- carrot-river-lime-robot (23) → passphrase (words only) but long
+- Carrot-River-Lime-Robot! (25) → passphrase + symbol, very strong
+
+================================================================================
+
+BEST PRACTICES (FINAL)
+
+- Use a password manager → unique, long passwords for every account
+- Favor length-first → target 14–16+ chars (or 4–5 random words)
+- Add diversity but avoid predictable patterns
+- Turn on MFA wherever available
+- Never reuse passwords; rotate if a breach occurs
+
+================================================================================
+
+REFERENCES
+
+- NIST SP 800-63B (Digital Identity Guidelines)
+- passwordmeter.com (strength meter)
+- haveibeenpwned.com (breach checks)
+
+================================================================================
