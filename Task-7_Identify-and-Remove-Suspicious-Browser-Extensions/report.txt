@@ -1,0 +1,92 @@
+TASK 7: REPORT IDENTIFY AND REMOVE SUSPICIOUS BROWSER EXTENSIONS
+NAME: KRUSHAL HIRPARA
+DATE: 30 OCTOBER 2025
+
+================================================================================
+
+SUMMARY:
+
+1) Objective: review installed browser extensions, identify risky or unused items, and reduce the attack surface.
+2) Reviewed default Chrome profile, including Core, MetaMask, Plasma Integration, Phantom, WArocket, and GrassLiteNode.
+3) Removed WArocket and GrassLiteNode for security and privacy reasons.
+4) Kept or monitored remaining items based on use and risk.
+5) Outcome: smaller attack surface and clear next steps.
+
+================================================================================
+
+SCOPE:
+
+1) In scope: personal workstation and default Chrome profile.
+2) Out of scope: enterprise managed devices and other user profiles.
+
+================================================================================
+
+ENVIRONMENT:
+
+1) Operating system: Linux on a personal laptop.
+2) Network: home network.
+3) Browser: Google Chrome, stable channel.
+4) User privileges: standard user.
+
+================================================================================
+
+METHODOLOGY:
+
+1) Opened the browser extensions manager and listed installed items.
+2) Reviewed purpose, permissions, reputation, and usage need.
+3) Classified each item as keep, monitor, or removal, with justification.
+4) Prepared next actions for safe cleanup and follow-up.
+
+================================================================================
+
+FINDINGS:
+
+REMOVED EXTENSIONS:
+1) WArocket — removed on 30 October 2025; reason: automation risk and privacy concerns; not required for daily use.
+2) GrassLiteNode — removed on 30 October 2025; reason: unclear value and background network activity; not required.
+
+KEPT EXTENSIONS:
+1) Plasma Integration — desktop integration for KDE; keep if you use KDE features.
+2) Grammarly — writing assistance; keep if used for daily writing.
+
+MONITOR EXTENSIONS:
+1) MetaMask — crypto wallet; high permissions (access to all sites); keep only if actively used; enable site access on click.
+2) Core — crypto wallet; similar risk profile; keep only if used.
+3) Phantom — crypto wallet; similar risk profile; keep only if used.
+
+RECOMMENDED REMOVAL IF NOT NEEDED:
+1) Google Docs Offline — keep only if you use offline editing; otherwise remove.
+
+================================================================================
+
+RECOMMENDATIONS:
+
+1) Keep MetaMask, Core, and Phantom only if actively used; disable when not needed; enable site access on click.
+2) Keep Plasma Integration if you depend on KDE integration; otherwise disable.
+3) Remove Google Docs Offline if you do not use offline features.
+4) Review extensions monthly and keep the browser updated.
+
+================================================================================
+
+LIMITATIONS:
+
+1) Some names appear unresolved due to locale message keys.
+2) No enterprise telemetry or network inspection was performed.
+
+================================================================================
+
+APPENDIX EXTENSION INVENTORY:
+
+1) Plasma Integration — present.
+2) Grammarly — present.
+3) MetaMask — present.
+
+================================================================================
+
+AFTER ACTIONS:
+
+1) Completed removal of WArocket and GrassLiteNode.
+2) Confirm you actively need MetaMask, Core, and Phantom; disable when not in use.
+3) Verify normal browsing, login, and downloads; recheck after the next browser update.
+4) Review the list monthly and remove items you no longer use.
+

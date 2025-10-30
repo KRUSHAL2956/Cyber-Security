@@ -1,0 +1,57 @@
+TASK 7 NOTES: IDENTIFY AND REMOVE SUSPICIOUS BROWSER EXTENSIONS
+DATE: 30 OCT 2025
+OWNER: KRUSHAL HIRPARA
+
+================================================================================
+
+CHECKLIST
+
+[ ] Define objective and scope
+[ ] List extensions and current status
+[ ] Review permissions, publisher, reviews
+[ ] Remove or disable items not needed
+[ ] Restart browser and verify normal use
+[ ] Summarize findings and lessons learned
+
+================================================================================
+
+QUICK PAGES (BROWSER)
+
+1) Chrome: chrome://extensions
+2) Firefox: about:addons
+
+================================================================================
+
+EXTENSIONS REVIEW LOG
+
+1) WArocket — Status: Removed; Reason: automation risk and privacy concerns; not required
+2) GrassLiteNode — Status: Removed; Reason: unclear value; background network activity
+3) MetaMask — Status: Monitor; Reason: high permissions; keep only if actively used; enable site access on click
+4) Core — Status: Monitor; Reason: crypto wallet; keep only if used
+5) Phantom — Status: Monitor; Reason: crypto wallet; keep only if used
+6) Plasma Integration — Status: Keep; Reason: KDE desktop integration used
+7) Grammarly — Status: Keep; Reason: writing assistance used
+8) Google Docs Offline — Status: Consider removal if offline editing is not needed
+
+================================================================================
+
+REFERENCES
+
+1) Search terms: "<extension name> security", "<extension name> privacy", "<extension name> malware"
+2) Publisher pages and recent update history
+
+================================================================================
+
+OBSERVATIONS
+
+1) After cleanup, normal browsing confirmed
+2) Recheck performance after next browser update
+
+================================================================================
+
+NEXT STEPS
+
+1) Review monitored items monthly and remove if not needed
+2) Keep browser and extensions updated
+3) Prefer site access on click for high permission extensions
+
