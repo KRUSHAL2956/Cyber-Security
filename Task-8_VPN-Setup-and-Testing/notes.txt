@@ -1,0 +1,210 @@
+Task 8 - VPN Setup and Testing Notes
+
+Date: 31 October 2025
+
+================================================================================
+
+GOAL
+
+- Understand how VPNs protect privacy and enable secure communication
+- Set up ProtonVPN Free and verify IP masking
+- Test DNS leak protection and browsing performance
+- Document benefits and limitations
+
+================================================================================
+
+SETUP STEPS
+
+1. Visited protonvpn.com and created free account
+2. Verified email and selected Free plan
+3. Downloaded Linux application
+4. Installed and launched ProtonVPN app
+5. Logged in with credentials
+6. Selected Netherlands free server (NL-FREE)
+7. Clicked Connect button
+8. Connection established in 6-8 seconds
+
+================================================================================
+
+BASELINE MEASUREMENTS (BEFORE VPN)
+
+IP Address: 152.59.***.***
+Location: Surat, Gujarat, India
+ISP: Reliance Jio Infocomm Limited
+
+Speed Test Results:
+- Download: 50.23 Mbps
+- Upload: 42.15 Mbps
+- Ping: 14 ms
+
+================================================================================
+
+VPN CONNECTION DETAILS
+
+Server: NL-FREE (Amsterdam, Netherlands)
+Protocol: OpenVPN (UDP)
+Encryption: AES-256-GCM with RSA-4096 handshake
+Connection Time: 6-8 seconds
+Status: Connected (green icon)
+
+================================================================================
+
+AFTER VPN MEASUREMENTS
+
+IP Address: 185.159.***.**
+Location: Amsterdam, Netherlands
+ISP: ProtonVPN AG (Switzerland)
+
+Speed Test Results:
+- Download: 28.12 Mbps (44% reduction)
+- Upload: 23.67 Mbps (44% reduction)
+- Ping: 175 ms (12.5x increase)
+
+IP Change: Confirmed - real location masked
+
+================================================================================
+
+VERIFICATION TESTS
+
+DNS Leak Test (dnsleaktest.com):
+- Result: PASSED
+- Only ProtonVPN DNS servers visible
+- No ISP DNS detected
+
+WebRTC Leak Test (browserleaks.com):
+- Result: PASSED
+- Real IP not exposed
+
+IPv6 Leak Test:
+- Result: PASSED
+- IPv6 traffic properly handled
+
+Kill Switch Test:
+- Manually interrupted connection
+- Internet blocked as expected
+- Feature working correctly
+
+================================================================================
+
+BROWSING TESTS
+
+General Websites:
+- Google, YouTube, news sites: worked normally
+- Page load time: 1-2 seconds slower
+
+Streaming:
+- YouTube: 720p smooth, 1080p minor buffering
+- Netflix: VPN detected, showed proxy error
+
+Banking Sites:
+- ICICI, SBI: showed location change warning
+- Required OTP verification (expected security measure)
+
+Downloads:
+- File downloads worked at VPN speed (~28 Mbps)
+
+================================================================================
+
+KEY OBSERVATIONS
+
+Performance Impact:
+- Speed reduced by 44% (acceptable for most browsing)
+- Latency increased 12.5x (impacts gaming/video calls)
+- Distance to server matters: ~6500 km to Netherlands
+
+Privacy Protection:
+- Real IP successfully masked
+- DNS queries protected
+- No leaks detected in any tests
+
+Limitations Found:
+- Free tier: only 3 countries available
+- Netflix blocks VPN traffic
+- Banking sites show security warnings
+- Slower speeds during peak hours
+
+================================================================================
+
+VPN PROTOCOLS RESEARCH
+
+OpenVPN:
+- Most reliable and widely supported
+- Strong encryption (AES-256)
+- Slightly slower than WireGuard
+
+WireGuard:
+- Newer, faster protocol
+- Modern cryptography
+- Available in ProtonVPN
+
+IKEv2/IPSec:
+- Good for mobile devices
+- Fast reconnection
+- Less common on desktop
+
+================================================================================
+
+PRIVACY FEATURES
+
+ProtonVPN Offers:
+- No-logs policy (audited)
+- Swiss jurisdiction (strong privacy laws)
+- Kill switch (NetShield)
+- DNS leak protection
+- Open source client
+
+Free Tier Limitations:
+- 3 countries only (USA, Netherlands, Japan)
+- Medium speed (lower priority)
+- No P2P support
+- Basic features only
+
+================================================================================
+
+BEST PRACTICES LEARNED
+
+When to Use VPN:
+- Public Wi-Fi (cafes, airports, hotels)
+- Sensitive browsing (banking, confidential work)
+- Privacy from ISP tracking
+- Accessing region-specific content (responsibly)
+
+Server Selection:
+- Choose geographically close servers for speed
+- Verify DNS leak protection after connecting
+- Enable kill switch for sensitive activities
+
+What VPN Doesn't Protect:
+- Not complete anonymity
+- Doesn't protect against malware/phishing
+- Trust required in VPN provider
+- Websites can still track you via cookies
+
+================================================================================
+
+COMMANDS/TOOLS USED
+
+Speed test: speedtest.net (web interface)
+IP check: whatismyipaddress.com
+DNS leak test: dnsleaktest.com
+WebRTC leak: browserleaks.com
+
+================================================================================
+
+FINAL VERDICT
+
+ProtonVPN Free is good for:
+- Public Wi-Fi protection
+- General privacy
+- Learning about VPNs
+- Unlimited bandwidth
+
+Trade-offs:
+- 44% speed reduction
+- High latency for distant servers
+- Limited server options (3 countries)
+- Some streaming services block it
+
+Real-world use case: Perfect for public Wi-Fi; acceptable for general browsing; not ideal for gaming or video calls.
+
+================================================================================
